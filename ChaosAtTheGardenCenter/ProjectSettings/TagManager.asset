@@ -6,7 +6,7 @@ TagManager:
   tags:
   - Veg
   - Flower
-  - DropOff
+  - Drop
   layers:
   - Default
   - TransparentFX

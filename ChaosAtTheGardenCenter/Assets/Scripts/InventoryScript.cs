@@ -25,12 +25,12 @@ public class InventoryScript : MonoBehaviour
         {
             isHoldingItem = false;
 
-            Debug.Log("Info about veg got to interface");
+           
         }
         else if (isHoldingItem == true && playerScript.GetItemTag() == "Flower")
         {
             isHoldingItem = false;
-            Debug.Log("Info about flower got to interface");
+           
         }
 
     }
