@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private bool isTable;
     private int vegCount;
     private int flowerCount;
+    private string currentItem;
 
     [SerializeField] private int spd = 10;
     [SerializeField] private Rigidbody rb;
@@ -63,7 +64,10 @@ public class PlayerController : MonoBehaviour
     {
         return itemTag;
     }
-
+    public string GetCurrentItem()
+    {
+        return currentItem;
+    }
     private void Move(GameObject playerModel)
     {
         
@@ -159,20 +163,21 @@ public class PlayerController : MonoBehaviour
     {
         if (pickedUp == true)
         {
-            canPick = false; /////////////////////////////////////// AFTER 1 DROPOFF ACTS LIKE NEXT PICKUP IS PLACING ON TABLE // FIX SO IT DOESNT STAY TABLE ACCESS
+            canPick = false;
         }
 
         if (canPick == true)
         {
             
             if (hit.collider.tag.Equals("Veg"))
-            {
+            {   
 
                 hit.collider.gameObject.SetActive(false);
                 pickedUp = true;
                 canPick = false;
                 isVeg = true;
                 isTable = false;
+                currentItem = "Veg";
             }
             else
             {
@@ -187,6 +192,7 @@ public class PlayerController : MonoBehaviour
                 canPick = false;
                 isFlower = true;
                 isTable = false;
+                currentItem = "Flower";
             }
             else
             {
@@ -231,6 +237,8 @@ public class PlayerController : MonoBehaviour
                     Debug.Log("Dropped off");
                 }
 
+                currentItem = "Default";
+
                 Debug.Log("hit table");
 
                 
@@ -239,6 +247,7 @@ public class PlayerController : MonoBehaviour
 
             
         }
-           
+        
+
     }
 }
