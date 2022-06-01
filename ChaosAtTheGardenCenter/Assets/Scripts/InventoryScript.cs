@@ -25,7 +25,7 @@ public class InventoryScript : MonoBehaviour
     void Update()
     {
         
-        isHoldingItem = playerScript.GetpickedUp();
+        isHoldingItem = playerScript.GetPickedUp();
 
 
         if (isHoldingItem == true)
