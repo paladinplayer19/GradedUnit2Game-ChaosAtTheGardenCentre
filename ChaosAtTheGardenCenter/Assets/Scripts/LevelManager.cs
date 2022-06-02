@@ -8,13 +8,15 @@ public class LevelManager : MonoBehaviour
     private string welcome = "WelcomeScreen";
     private bool isGameOver;
     private PlayerController playerScript;
-    
+    private float timeSince;
     [SerializeField] private GameObject player;
-
+    [SerializeField] private GameObject canvas;
+    private InventoryScript inventoryScript;
     // Start is called before the first frame update
     void Start()
     {
         playerScript = player.GetComponent<PlayerController>();
+        inventoryScript = canvas.GetComponent<InventoryScript>();
     }
 
     // Update is called once per frame
@@ -24,7 +26,7 @@ public class LevelManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name == welcome)
         {
-
+            isGameOver = false;
             if (Input.GetKeyUp(KeyCode.K))
             {
                 SceneManager.LoadScene(game);
@@ -36,9 +38,17 @@ public class LevelManager : MonoBehaviour
             
             if (isGameOver == true)
             {
+                timeSince += 1f * Time.deltaTime;
+                inventoryScript.DisplayFinalScore();
+
+                if (timeSince >= 5.0f)
+                {
+                    timeSince = 0;
+
+
                 
-                isGameOver = false;
                 SceneManager.LoadScene(welcome);
+                }
 
             }
         }

@@ -22,19 +22,22 @@ public class PlayerController : MonoBehaviour
     private bool isGameOver;
     private int checkCountVeg;
     private int checkCountFlower;
-   
+ 
 
     [SerializeField] private int spd = 10;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private GameObject playerModel;
+    
     [SerializeField] private GameObject[] droppedOffFlowers = new GameObject[4];
     [SerializeField] private GameObject[] droppedOffVeg = new GameObject[4];
     [SerializeField] private GameObject[] flowers = new GameObject[4];
     [SerializeField] private GameObject[] vegs = new GameObject[4];
+   
 
     // Start is called before the first frame update
     void Start()
     {
+        
         rb = this.GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         pickedUp = false;
@@ -46,7 +49,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-
+        
 
        Move(playerModel);
        canPick = CheckItem();
@@ -63,10 +66,11 @@ public class PlayerController : MonoBehaviour
                 }
 
             }
+
+         CheckGameOver();
+
         }
        
-
-        CheckGameOver();
 
     }
 
@@ -338,7 +342,7 @@ public class PlayerController : MonoBehaviour
 
         if (checkCountFlower == 1 && checkCountVeg == 1)
         {
-            Debug.Log("2");
+            
             isGameOver = true;
         }
         else

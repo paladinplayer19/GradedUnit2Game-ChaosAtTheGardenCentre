@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
+using UnityEngine.SceneManagement;
 public class AI_Controller : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject caterpillar;
     [SerializeField] private GameObject snail;
+    [SerializeField] private GameObject canvas;
     private PlayerController playerScript;
+    private InventoryScript inventoryScript;
     private NavMeshAgent navMeshAgent_Snail;
     private NavMeshAgent navMeshAgent_Caterpillar;
     private bool collidedVeg;
@@ -22,7 +24,7 @@ public class AI_Controller : MonoBehaviour
     void Start()
     {
         playerScript = player.GetComponent<PlayerController>();
-        
+        inventoryScript = canvas.GetComponent<InventoryScript>();
     }
 
     private void Awake()
@@ -49,8 +51,15 @@ public class AI_Controller : MonoBehaviour
                 if (collidedVeg == true)
                 {
                     vegs[collidedVegIndex].SetActive(false);
-                    collidedVeg = false;
+                    
+                   
                     navMeshAgent_Snail.destination = vegs[i + 1].transform.position;
+                    collidedVeg = false;
+
+                    if (SceneManager.GetActiveScene().name == "Game")
+                    {
+                        inventoryScript.DecrementScore(100);
+                    }
                 }
 
            }
@@ -71,9 +80,18 @@ public class AI_Controller : MonoBehaviour
                 if (collidedFlower == true)
                 {
                     flowers[collidedFlowerIndex].SetActive(false);
-                    collidedFlower = false;
+                    
+                    
                     navMeshAgent_Caterpillar.destination = flowers[i + 1].transform.position;
+                    
+                    collidedFlower = false;
+
+                    if (SceneManager.GetActiveScene().name == "Game")
+                    {
+                        inventoryScript.DecrementScore(50);
+                    }
                 }
+
             }
            
         }
@@ -82,6 +100,7 @@ public class AI_Controller : MonoBehaviour
         {
             if (vegs[i].activeSelf == true)
             {
+
                 return;
             }
             else
@@ -106,6 +125,7 @@ public class AI_Controller : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        
         for (int i = 0; i < vegs.Length; ++i)
         {
             if (this.name == snail.name)
@@ -130,4 +150,6 @@ public class AI_Controller : MonoBehaviour
             }
         }
     }
+
+    
 }

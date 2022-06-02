@@ -1039,6 +1039,7 @@ MonoBehaviour:
   player: {fileID: 811918569}
   caterpillar: {fileID: 1546053539}
   snail: {fileID: 173749059}
+  canvas: {fileID: 1824138209}
 --- !u!4 &175230629 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4041621009190380, guid: 3e11d8992c7896044a5461e7cf12c996,
@@ -1548,7 +1549,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.1, y: 11.2}
+  m_AnchoredPosition: {x: 0.8, y: 16.2}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &274762656
@@ -1574,16 +1575,16 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
-    m_Alignment: 0
-    m_AlignByGeometry: 0
+    m_BestFit: 1
+    m_MinSize: 0
+    m_MaxSize: 14
+    m_Alignment: 1
+    m_AlignByGeometry: 1
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Chaos At the Garden Centre
+  m_Text: 'Chaos At the Garden Centre '
 --- !u!222 &274762657
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3121,7 +3122,6 @@ GameObject:
   m_Component:
   - component: {fileID: 578812839}
   - component: {fileID: 578812840}
-  - component: {fileID: 578812841}
   m_Layer: 0
   m_Name: Flower_2
   m_TagString: Flower
@@ -3158,19 +3158,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.37292835, y: 0.4768734, z: 0.4326134}
   m_Center: {x: -0.003888212, y: 0.2615633, z: -0.07380908}
---- !u!114 &578812841
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 578812838}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26e06ad2c31d1454b9ab6bd2c24a5547, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 811918569}
 --- !u!1001 &583065587
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3501,7 +3488,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4.2, y: -20.6}
+  m_AnchoredPosition: {x: 6.1, y: -27.6}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &602830061
@@ -4393,7 +4380,6 @@ GameObject:
   m_Component:
   - component: {fileID: 752703670}
   - component: {fileID: 752703671}
-  - component: {fileID: 752703672}
   m_Layer: 0
   m_Name: Flower_1
   m_TagString: Flower
@@ -4430,19 +4416,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.37292835, y: 0.4768734, z: 0.4326134}
   m_Center: {x: -0.003888212, y: 0.2615633, z: -0.07380908}
---- !u!114 &752703672
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 752703669}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26e06ad2c31d1454b9ab6bd2c24a5547, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 811918569}
 --- !u!1001 &754548363
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5429,6 +5402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 811918569}
+  canvas: {fileID: 1824138209}
 --- !u!1001 &812094914
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7879,7 +7853,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1125601299}
   - component: {fileID: 1125601300}
-  - component: {fileID: 1125601301}
   m_Layer: 0
   m_Name: Flower_3
   m_TagString: Flower
@@ -7916,19 +7889,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.37292835, y: 0.4768734, z: 0.4326134}
   m_Center: {x: -0.003888212, y: 0.2615633, z: -0.07380908}
---- !u!114 &1125601301
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1125601298}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26e06ad2c31d1454b9ab6bd2c24a5547, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 811918569}
 --- !u!1 &1145930838
 GameObject:
   m_ObjectHideFlags: 0
@@ -8708,19 +8668,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.19192812, y: 0.28818056, z: 0.20180514}
   m_Center: {x: 0.000000022351745, y: 0.14409055, z: 0.000000011175873}
---- !u!114 &1233125265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1233125263}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26e06ad2c31d1454b9ab6bd2c24a5547, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 811918569}
 --- !u!4 &1233125267 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4036945459416220, guid: 652472ea6528f0d449e98084839f05dd,
@@ -8979,7 +8926,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1282197329}
   - component: {fileID: 1282197330}
-  - component: {fileID: 1282197331}
   m_Layer: 0
   m_Name: Flower
   m_TagString: Flower
@@ -9016,19 +8962,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.37292835, y: 0.4768734, z: 0.4326134}
   m_Center: {x: -0.003888212, y: 0.2615633, z: -0.07380908}
---- !u!114 &1282197331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1282197328}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26e06ad2c31d1454b9ab6bd2c24a5547, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 811918569}
 --- !u!1001 &1284403393
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9962,19 +9895,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.19192812, y: 0.28818056, z: 0.20180514}
   m_Center: {x: 0.000000022351745, y: 0.14409055, z: 0.000000011175873}
---- !u!114 &1430463566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1430463564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26e06ad2c31d1454b9ab6bd2c24a5547, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 811918569}
 --- !u!4 &1430463568 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4036945459416220, guid: 652472ea6528f0d449e98084839f05dd,
@@ -11001,6 +10921,7 @@ MonoBehaviour:
   player: {fileID: 811918569}
   caterpillar: {fileID: 1546053539}
   snail: {fileID: 173749059}
+  canvas: {fileID: 1824138209}
 --- !u!65 &1546053543
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12477,19 +12398,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.19192812, y: 0.28818056, z: 0.20180514}
   m_Center: {x: 0.000000022351745, y: 0.14409055, z: 0.000000011175873}
---- !u!114 &1743456947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1743456945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26e06ad2c31d1454b9ab6bd2c24a5547, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 811918569}
 --- !u!4 &1743581076 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4488625856254588, guid: 040b672c2038c2d47b816ecd2d7e6855,
@@ -14950,19 +14858,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.19192812, y: 0.28818056, z: 0.20180514}
   m_Center: {x: 0.000000022351745, y: 0.14409055, z: 0.000000011175873}
---- !u!114 &2053678462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2053678460}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26e06ad2c31d1454b9ab6bd2c24a5547, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 811918569}
 --- !u!4 &2056377960 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4078272958647214, guid: 0158a6863370c3d469ddee8e331810db,
