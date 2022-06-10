@@ -32,7 +32,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject[] droppedOffVeg = new GameObject[4];
     [SerializeField] private GameObject[] flowers = new GameObject[4];
     [SerializeField] private GameObject[] vegs = new GameObject[4];
-   
+    [SerializeField] private GameObject caterpillar;
+    [SerializeField] private GameObject snail;
+
 
     // Start is called before the first frame update
     void Start()
@@ -51,7 +53,7 @@ public class PlayerController : MonoBehaviour
 
         
 
-       Move(playerModel);
+       
        canPick = CheckItem();
 
         if (SceneManager.GetActiveScene().name == "Game")
@@ -70,8 +72,8 @@ public class PlayerController : MonoBehaviour
          CheckGameOver();
 
         }
-       
 
+        Move(playerModel);
     }
 
     public bool GetPickedUp()
@@ -119,7 +121,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Move(GameObject playerModel)
     {
-        
+        rb.velocity = Vector3.zero;
 
         if (rb.velocity == Vector3.zero)
         {
@@ -204,7 +206,7 @@ public class PlayerController : MonoBehaviour
         }
         
 
-        Debug.DrawRay(ray.origin, ray.direction);
+       // Debug.DrawRay(ray.origin, ray.direction);
 
         return canPick;
     }
@@ -252,7 +254,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-            Debug.Log("Picked Up");
+           // Debug.Log("Picked Up");
 
 
         }
@@ -275,7 +277,7 @@ public class PlayerController : MonoBehaviour
                     canPick = true;
                     vegCount++;
                     isTable = false;
-                    Debug.Log("Dropped off");
+                    //Debug.Log("Dropped off");
                 }
 
                 if (isFlower == true)
@@ -285,12 +287,12 @@ public class PlayerController : MonoBehaviour
                     canPick = true;
                     flowerCount++;
                     isTable = false;
-                    Debug.Log("Dropped off");
+                   // Debug.Log("Dropped off");
                 }
 
                 currentItem = "Default";
                 droppedOff = true;
-                Debug.Log("hit table");
+               // Debug.Log("hit table");
 
                 
                 
@@ -352,5 +354,26 @@ public class PlayerController : MonoBehaviour
         }
 
         
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name == snail.name || collision.gameObject.name == caterpillar.name)
+        {
+            rb.isKinematic = true;
+            rb.velocity = Vector3.zero;
+            rb.isKinematic = false;
+        }
+        if (collision.collider.tag.Equals("Drop"))
+        {
+            rb.isKinematic = true;
+            rb.velocity = Vector3.zero;
+            rb.isKinematic = false;
+        }
+        if (collision.collider.tag.Equals("Obstacle"))
+        {
+            rb.isKinematic = true;
+            rb.velocity = Vector3.zero;
+            rb.isKinematic = false;
+        }
     }
 }

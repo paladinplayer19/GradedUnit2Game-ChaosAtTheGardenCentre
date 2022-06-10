@@ -14,11 +14,14 @@ public class AudioController : MonoBehaviour
     private RaycastHit hit;
     private bool isPickedUp;
     private bool canPlayDrop;
+    private bool canPlayPick;
 
     // Start is called before the first frame update
     void Start()
     {
         playerScript = player.GetComponent<PlayerController>();
+        canPlayPick = true;
+        canPlayDrop = false;
     }
 
     // Update is called once per frame
@@ -33,9 +36,10 @@ public class AudioController : MonoBehaviour
 
             if (hit.collider != null)
             {
-                if ((hit.collider.tag == "Veg" || hit.collider.tag == "Flower") && isPickedUp == true)
+                if ((hit.collider.tag == "Veg" || hit.collider.tag == "Flower") && isPickedUp == true && canPlayPick == true)
                 {
                     pickUpAudio.Play();
+                    canPlayPick = false;
                     canPlayDrop = true;
                 }
             }
@@ -51,6 +55,7 @@ public class AudioController : MonoBehaviour
                     {
                       dropOffAudio.Play();
                       canPlayDrop = false;
+                      canPlayPick = true;
                     }
               }
 

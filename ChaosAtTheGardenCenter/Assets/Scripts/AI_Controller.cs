@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
+
 public class AI_Controller : MonoBehaviour
 {
     [SerializeField] private GameObject player;
@@ -13,16 +14,26 @@ public class AI_Controller : MonoBehaviour
     private InventoryScript inventoryScript;
     private NavMeshAgent navMeshAgent_Snail;
     private NavMeshAgent navMeshAgent_Caterpillar;
+    private LineRenderer snailPathLine;
+    private LineRenderer caterpillarPathLine;
     private bool collidedVeg;
     private bool collidedFlower;
     private int collidedVegIndex;
     private int collidedFlowerIndex;
+    
     private GameObject[] flowers = new GameObject[4];
     private GameObject[] vegs = new GameObject[4];
 
+    private NavMeshPath path1;
+    private NavMeshPath path2;
     // Start is called before the first frame update
     void Start()
     {
+        snailPathLine = snail.GetComponent<LineRenderer>();
+        caterpillarPathLine = caterpillar.GetComponent<LineRenderer>();
+
+        path1 = new NavMeshPath();
+        path2 = new NavMeshPath();
         playerScript = player.GetComponent<PlayerController>();
         inventoryScript = canvas.GetComponent<InventoryScript>();
     }
@@ -42,7 +53,8 @@ public class AI_Controller : MonoBehaviour
         {
            if (vegs[i].activeSelf == true)
            {
-                navMeshAgent_Snail.destination = vegs[i].transform.position;
+                navMeshAgent_Snail.CalculatePath(vegs[i].transform.position, path1);
+                
                
 
                Quaternion toRotation = Quaternion.LookRotation(Vector3.forward, navMeshAgent_Snail.steeringTarget);
@@ -51,9 +63,14 @@ public class AI_Controller : MonoBehaviour
                 if (collidedVeg == true)
                 {
                     vegs[collidedVegIndex].SetActive(false);
+
+
+                    if (i+1 < vegs.Length)
+                    {
+
+                    navMeshAgent_Snail.CalculatePath(vegs[i + 1].transform.position, path1);//check if next path is within veg.length cause i +1 is bad juju
                     
-                   
-                    navMeshAgent_Snail.destination = vegs[i + 1].transform.position;
+                    }
                     collidedVeg = false;
 
                     if (SceneManager.GetActiveScene().name == "Game")
@@ -63,8 +80,9 @@ public class AI_Controller : MonoBehaviour
                 }
 
            }
-          
 
+
+            navMeshAgent_Snail.SetPath(path1);
 
         }
 
@@ -72,7 +90,8 @@ public class AI_Controller : MonoBehaviour
         {
             if (flowers[i].activeSelf == true)
             {
-                navMeshAgent_Caterpillar.destination = flowers[i].transform.position;
+                navMeshAgent_Caterpillar.CalculatePath(flowers[i].transform.position, path2);
+                
 
                 Quaternion toRotation = Quaternion.LookRotation(Vector3.forward, navMeshAgent_Caterpillar.steeringTarget);
                 caterpillar.transform.rotation = Quaternion.RotateTowards(caterpillar.transform.rotation, toRotation, 10 * Time.deltaTime);
@@ -80,10 +99,13 @@ public class AI_Controller : MonoBehaviour
                 if (collidedFlower == true)
                 {
                     flowers[collidedFlowerIndex].SetActive(false);
-                    
-                    
-                    navMeshAgent_Caterpillar.destination = flowers[i + 1].transform.position;
-                    
+
+                    if (i + 1 < flowers.Length)
+                    {
+                        navMeshAgent_Caterpillar.CalculatePath(flowers[i + 1].transform.position, path2);
+                    }
+
+
                     collidedFlower = false;
 
                     if (SceneManager.GetActiveScene().name == "Game")
@@ -93,34 +115,13 @@ public class AI_Controller : MonoBehaviour
                 }
 
             }
-           
+
+            navMeshAgent_Caterpillar.SetPath(path2);
         }
 
-        for (int i = 0; i < vegs.Length; ++i)
-        {
-            if (vegs[i].activeSelf == true)
-            {
+       
 
-                return;
-            }
-            else
-            {
-                navMeshAgent_Snail.isStopped = true;
-            }
-        }
-
-        for (int i = 0; i < flowers.Length; ++i)
-        {
-            if (flowers[i].activeSelf == true)
-            {
-                return;
-            }
-            else
-            {
-                navMeshAgent_Caterpillar.isStopped = true;
-            }
-        }
-
+        //DrawLine();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -149,7 +150,41 @@ public class AI_Controller : MonoBehaviour
                 }
             }
         }
+
+        
     }
 
+    private void DrawLine()
+    {
+        snailPathLine.positionCount = navMeshAgent_Snail.path.corners.Length;
+        snailPathLine.SetPosition(0, snail.transform.position); /// might need target pos
+
+        if (navMeshAgent_Snail.path.corners.Length < 2)
+        {
+            return;
+        }
+
+        for (int i = 0; i < navMeshAgent_Snail.path.corners.Length; ++i)
+        {
+            Vector3 pointPosSnail = new Vector3(navMeshAgent_Snail.path.corners[i].x, navMeshAgent_Snail.path.corners[i].y, navMeshAgent_Snail.path.corners[i].z);
+
+            snailPathLine.SetPosition(i, pointPosSnail);
+        }
+
+        caterpillarPathLine.positionCount = navMeshAgent_Caterpillar.path.corners.Length;
+        caterpillarPathLine.SetPosition(0, caterpillar.transform.position); /// might need target pos
+
+        if (navMeshAgent_Caterpillar.path.corners.Length < 2)
+        {
+            return;
+        }
+
+        for (int i = 0; i < navMeshAgent_Caterpillar.path.corners.Length; ++i)
+        {
+            Vector3 pointPosCaterpillar = new Vector3(navMeshAgent_Caterpillar.path.corners[i].x, navMeshAgent_Caterpillar.path.corners[i].y, navMeshAgent_Caterpillar.path.corners[i].z);
+
+            caterpillarPathLine.SetPosition(i, pointPosCaterpillar);
+        }
+    }
     
 }

@@ -9,6 +9,7 @@ TagManager:
   - Drop
   - VegDropped
   - FlowerDropped
+  - Osbtacle
   layers:
   - Default
   - TransparentFX
