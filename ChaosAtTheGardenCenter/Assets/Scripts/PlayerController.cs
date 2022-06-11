@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    
+    // Declare private variables
     private Animator anim;
     private string itemTag;
     private Vector3 dir;
@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private int checkCountFlower;
  
 
+    // Declare serialized private variables
     [SerializeField] private int spd = 10;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private GameObject playerModel;
@@ -36,18 +37,20 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject snail;
 
 
-    // Start is called before the first frame update
+   
     void Start()
     {
-        
+        //Get components
         rb = this.GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+
+        // Set action states
         pickedUp = false;
         canPick = true;
 
     }
 
-    // Update is called once per frame
+  
     void Update()
     {
 
@@ -56,12 +59,16 @@ public class PlayerController : MonoBehaviour
        
        canPick = CheckItem();
 
+        // make sure current scene is game
         if (SceneManager.GetActiveScene().name == "Game")
         {
+            
             if (Input.GetKeyDown(KeyCode.K))
             {
 
                 PickUp(canPick);
+
+                // checks if player is facing the table
                 if (isTable == true)
                 {
                     PlaceItem(canPick);
@@ -121,8 +128,10 @@ public class PlayerController : MonoBehaviour
     }
     private void Move(GameObject playerModel)
     {
+        // Sets the velocity to zero everyframe
         rb.velocity = Vector3.zero;
 
+        // Check to see if the player is idle then sets idle to true
         if (rb.velocity == Vector3.zero)
         {
             anim.SetBool("isIdle", true);
@@ -130,6 +139,7 @@ public class PlayerController : MonoBehaviour
 
         
         
+            // moves player up if either key is pressed
             if (Input.GetKey("up") || Input.GetKey(KeyCode.W))
             {
                 rb.transform.Translate(0.0f, 0.0f, spd * Time.deltaTime);
@@ -141,7 +151,7 @@ public class PlayerController : MonoBehaviour
             
 
 
-
+            // moves player right if either key is pressed
             if (Input.GetKey("right") || Input.GetKey(KeyCode.D))
             {
 
@@ -154,7 +164,7 @@ public class PlayerController : MonoBehaviour
             
 
 
-
+            // moves player down if either key is pressed
             if (Input.GetKey("down") || Input.GetKey(KeyCode.S))
             {
                 rb.transform.Translate(0.0f, 0.0f, -spd * Time.deltaTime);
@@ -165,7 +175,7 @@ public class PlayerController : MonoBehaviour
             }
             
 
-
+            // moves player left if either key is pressed
             if (Input.GetKey("left") || Input.GetKey(KeyCode.A))
             {
                 rb.transform.Translate(-spd * Time.deltaTime, 0.0f, 0.0f);
@@ -179,27 +189,31 @@ public class PlayerController : MonoBehaviour
 
     private bool CheckItem()
     {
+        // Creates ray
         Ray ray = new Ray(rb.transform.position, dir);
 
-        
+        // casts a ray to see whats in front
         if (Physics.Raycast(ray, out hit, 1))
         {
+            // checks to see if raycast hit is a veg
             if (hit.collider.tag.Equals("Veg"))
             {
                 canPick = true;
                 itemTag = "Veg";
             }
+            // checks to see if raycast hit is a flower
             else if (hit.collider.tag.Equals("Flower"))
             {
                 canPick = true;
                 itemTag = "Flower";
             }
+            // checks to see if raycast hit is the table
             else if (hit.collider.tag.Equals("Drop"))
             {
                 isTable = true;
             }
-            
-            }
+
+        }
         else
         {
             canPick = false;
@@ -219,7 +233,7 @@ public class PlayerController : MonoBehaviour
 
         if (canPick == true)
         {
-            
+            // if object from raycast is veg then deactivate it
             if (hit.collider.tag.Equals("Veg"))
             {   
 
@@ -235,7 +249,7 @@ public class PlayerController : MonoBehaviour
             {
                 isVeg = false;
             }
-
+            // if object from raycast is flower then deactivate it
             if (hit.collider.tag.Equals("Flower"))
             {
 
@@ -263,13 +277,13 @@ public class PlayerController : MonoBehaviour
     }
     private void PlaceItem(bool canPick)
     {
-
+        // checks if player is holding an item
         if (pickedUp == true)
         {
-            
+            // checks if player is looking at the table 
             if (isTable == true)
             {
-
+                // checks if held item is veg
                 if (isVeg == true)
                 {
                     droppedOffVeg[vegCount].SetActive(true);
@@ -280,8 +294,10 @@ public class PlayerController : MonoBehaviour
                     //Debug.Log("Dropped off");
                 }
 
+                // checks if held item is flower
                 if (isFlower == true)
                 {
+
                     droppedOffFlowers[flowerCount].SetActive(true);
                     pickedUp = false;
                     canPick = true;
@@ -308,7 +324,7 @@ public class PlayerController : MonoBehaviour
     {
 
 
-
+        // Loops through all vegs and checks if any veg are still existing
         for (int i = 0; i < vegs.Length; ++i)
         {
             if (vegs[i].activeSelf == true)
@@ -318,13 +334,13 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-
+                
                 checkCountVeg = 1;
                 
                 
             }
         }
-
+        // Loops through all flowers and checks if any flower are still existing
         for (int i = 0; i < flowers.Length; ++i)
         {
             if (flowers[i].activeSelf == true)
@@ -341,7 +357,7 @@ public class PlayerController : MonoBehaviour
         }
 
         
-
+        // Checks to see if all plants are deactivated and decided if its gameover or not
         if (checkCountFlower == 1 && checkCountVeg == 1)
         {
             
@@ -357,6 +373,7 @@ public class PlayerController : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
+        // Makes sure there is not problems with collision
         if (collision.gameObject.name == snail.name || collision.gameObject.name == caterpillar.name)
         {
             rb.isKinematic = true;

@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class InventoryScript : MonoBehaviour
-{
+{   
+    // Declare serialized private variables
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject vegIcon;
     [SerializeField] private GameObject flowerIcon;
@@ -14,23 +15,24 @@ public class InventoryScript : MonoBehaviour
     [SerializeField] private GameObject finalScore;
     [SerializeField] private GameObject finalScoreBackground;
 
+    // Declare private variables
     private PlayerController playerScript;
     private bool isHoldingItem;
-    
     private int score;
-    
-
     private Text txt;
     private Text finalScoreTxt;
 
     // Start is called before the first frame update
     void Start()
     {
+        // Gets score components
         score = 600;
         txt = scoreTxt.GetComponent<Text>();
         finalScoreTxt = finalScore.GetComponent<Text>();
         txt.text = "Score: " + score;
 
+
+        // Sets up UI
         defaultIcon.SetActive(true);
         scoreTxtBackground.SetActive(true);
         scoreTxt.SetActive(true);
@@ -47,26 +49,30 @@ public class InventoryScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+       // Gets current state of isholdingitem
         isHoldingItem = playerScript.GetPickedUp();
 
 
+        // checks if game is over and is still holding item, then deactivates UI icons
         if (playerScript.GetIsGameOver() == true && isHoldingItem)
         {
+            // 
             flowerIcon.SetActive(false);
             vegIcon.SetActive(false);
         }
         else
         {
-
+            // checks if player is holding item or not
             if (isHoldingItem == true)
             {
+                // checks if player is holding a veg or not, then changes UI
                 if (playerScript.GetCurrentItem() == "Veg")
                 {
                     flowerIcon.SetActive(false);
 
                     vegIcon.SetActive(true);
                 }
+                // checks if player is holding a flower or not, then changes UI
                 else if (playerScript.GetCurrentItem() == "Flower")
                 {
                     vegIcon.SetActive(false);
@@ -79,6 +85,7 @@ public class InventoryScript : MonoBehaviour
             }
             else
             {
+                // makes UI blank if not holding item
                 flowerIcon.SetActive(false);
                 vegIcon.SetActive(false);
 
@@ -92,6 +99,7 @@ public class InventoryScript : MonoBehaviour
     
     public void DisplayFinalScore()
     {
+        // Deactivates game UI and activates gameover screen UI
         flowerIcon.SetActive(false);
         vegIcon.SetActive(false);
         scoreTxtBackground.SetActive(false);
@@ -104,13 +112,14 @@ public class InventoryScript : MonoBehaviour
     }
     public void DecrementScore(int scoreReduction)
     {
-
+        // Reduces score by 100
         if (scoreReduction == 100)
         {
             score -= 100;
             txt.text = "Score: " + score;
 
         }
+        // Reduces score by 50
         if (scoreReduction == 50)
         {
             score -= 50;
